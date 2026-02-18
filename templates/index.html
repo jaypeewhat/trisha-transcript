@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trisha's Transcript - Made with Love</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0011, #2d0a2e, #1a0a2e, #0d0d2b);
+            min-height: 100vh;
+            color: #e0e0e0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating hearts background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                radial-gradient(2px 2px at 10% 20%, rgba(255, 105, 180, 0.3) 50%, transparent 50%),
+                radial-gradient(2px 2px at 30% 60%, rgba(255, 182, 193, 0.2) 50%, transparent 50%),
+                radial-gradient(2px 2px at 50% 10%, rgba(255, 105, 180, 0.25) 50%, transparent 50%),
+                radial-gradient(2px 2px at 70% 80%, rgba(255, 182, 193, 0.15) 50%, transparent 50%),
+                radial-gradient(2px 2px at 90% 40%, rgba(255, 105, 180, 0.2) 50%, transparent 50%),
+                radial-gradient(3px 3px at 20% 90%, rgba(255, 20, 147, 0.15) 50%, transparent 50%),
+                radial-gradient(2px 2px at 80% 15%, rgba(255, 182, 193, 0.2) 50%, transparent 50%);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            background: linear-gradient(90deg, #ff69b4, #ff1493, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        header .subtitle {
+            color: #ff9ec7;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        header .made-by {
+            color: #886;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        header .made-by span {
+            color: #ff69b4;
+        }
+
+        header p {
+            color: #bba;
+            font-size: 1rem;
+        }
+
+        .heart-icon {
+            display: inline-block;
+            color: #ff1493;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 105, 180, 0.15);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ccc;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: #777;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: #ff69b4;
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.25);
+        }
+
+        select option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .row .form-group {
+            flex: 1;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: #fff;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 24px rgba(255, 105, 180, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ddd;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-copy {
+            background: rgba(108, 99, 255, 0.3);
+            color: #c4bfff;
+            border: 1px solid rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-copy:hover {
+            background: rgba(108, 99, 255, 0.45);
+        }
+
+        .btn-download {
+            background: rgba(0, 200, 150, 0.3);
+            color: #7dffd4;
+            border: 1px solid rgba(0, 200, 150, 0.4);
+        }
+
+        .btn-download:hover {
+            background: rgba(0, 200, 150, 0.45);
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .spinner .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff69b4;
+            margin: 0 4px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .spinner .dot:nth-child(1) { animation-delay: -0.32s; }
+        .spinner .dot:nth-child(2) { animation-delay: -0.16s; }
+        .spinner .dot:nth-child(3) { animation-delay: 0s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Results */
+        #results {
+            display: none;
+        }
+
+        .meta-bar {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .meta-tag {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #bbb;
+        }
+
+        .meta-tag span {
+            color: #ff69b4;
+            font-weight: 600;
+        }
+
+        .transcript-output {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            color: #d4d4d4;
+        }
+
+        .transcript-output::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .transcript-output::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .transcript-output::-webkit-scrollbar-thumb {
+            background: rgba(255, 105, 180, 0.4);
+            border-radius: 4px;
+        }
+
+        /* Timestamped view */
+        .snippet {
+            display: flex;
+            gap: 16px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .snippet:last-child {
+            border-bottom: none;
+        }
+
+        .snippet-time {
+            color: #ff69b4;
+            font-weight: 600;
+            min-width: 70px;
+            font-size: 0.85rem;
+            padding-top: 2px;
+            cursor: pointer;
+        }
+
+        .snippet-time:hover {
+            text-decoration: underline;
+        }
+
+        .snippet-text {
+            color: #d4d4d4;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Error */
+        .error-msg {
+            background: rgba(255, 59, 48, 0.15);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            border-radius: 10px;
+            padding: 16px 20px;
+            color: #ff6b6b;
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        /* Video embed */
+        .video-embed {
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-embed iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            border-radius: 12px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: transparent;
+            color: #888;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: rgba(255, 105, 180, 0.2);
+            color: #ff69b4;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Responsive */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #776;
+            font-size: 0.85rem;
+        }
+
+        footer .love {
+            color: #ff69b4;
+            font-weight: 600;
+        }
+
+        footer a {
+            color: #ff69b4;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .row { flex-direction: column; gap: 0; }
+            header h1 { font-size: 1.8rem; }
+            .btn-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="heart-icon">♥</span> Trisha's Transcript <span class="heart-icon">♥</span></h1>
+            <p class="subtitle">Your personal YouTube transcript tool</p>
+            <p class="made-by">Made with <span>♥</span> by Jaypee, your loving bf</p>
+        </header>
+
+        <div class="card">
+            <div class="form-group">
+                <label for="videoUrl">YouTube Video URL or ID</label>
+                <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="language">Language</label>
+                    <input type="text" id="language" placeholder="en" value="en">
+                </div>
+                <div class="form-group">
+                    <label for="format">Output Format</label>
+                    <select id="format">
+                        <option value="text">Plain Text</option>
+                        <option value="json">JSON</option>
+                        <option value="srt">SRT (Subtitles)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-primary" onclick="fetchTranscript()">Get Transcript</button>
+                <button class="btn-secondary" onclick="listLanguages()">List Languages</button>
+            </div>
+        </div>
+
+        <div class="error-msg" id="errorMsg"></div>
+
+        <div class="spinner" id="spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <!-- Languages List -->
+        <div class="card" id="languagesCard" style="display:none;">
+            <label>Available Languages</label>
+            <div id="languagesList" style="margin-top: 10px;"></div>
+        </div>
+
+        <!-- Results -->
+        <div id="results">
+            <div class="card">
+                <div class="video-embed" id="videoEmbed"></div>
+
+                <div class="meta-bar" id="metaBar"></div>
+
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('formatted')">Formatted</button>
+                    <button class="tab-btn" onclick="switchTab('timestamped')">Timestamped</button>
+                </div>
+
+                <div class="tab-content active" id="tab-formatted">
+                    <div class="transcript-output" id="formattedOutput"></div>
+                </div>
+
+                <div class="tab-content" id="tab-timestamped">
+                    <div class="transcript-output" id="timestampedOutput"></div>
+                </div>
+
+                <div class="btn-group" style="margin-top: 20px;">
+                    <button class="btn-copy" onclick="copyTranscript()">Copy to Clipboard</button>
+                    <button class="btn-download" onclick="downloadTranscript()">Download File</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTranscript = '';
+        let currentFormat = 'text';
+
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 6000);
+        }
+
+        function showSpinner(show) {
+            document.getElementById('spinner').style.display = show ? 'block' : 'none';
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            if (tab === 'formatted') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('tab-formatted').classList.add('active');
+            } else {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('tab-timestamped').classList.add('active');
+            }
+        }
+
+        async function fetchTranscript() {
+            const videoUrl = document.getElementById('videoUrl').value.trim();
+            const language = document.getElementById('language').value.trim() || 'en';
+            const format = document.getElementById('format').value;
+
+            if (!videoUrl) {
+                showError('Please enter a YouTube video URL or ID.');
+                return;
+            }
+
+            showSpinner(true);
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('languagesCard').style.display = 'none';
+            document.getElementById('errorMsg').style.display = 'none';
+
+            try {
+                const res = await fetch('/transcript', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ video_url: videoUrl, language, format }),
+                });
+
+                const data = await res.json();
+
+                if (!res.ok || data.error) {
+                    showError(data.error || 'Failed to fetch transcript.');
+                    showSpinner(false);
+                    return;
+                }
+
+                currentTranscript = data.formatted;
+                currentFormat = format;
+
+                // Video embed
+                document.getElementById('videoEmbed').innerHTML =
+                    `<iframe src="https://www.youtube.com/embed/${data.video_id}" allowfullscreen></iframe>`;
+
+                // Meta info
+                document.getElementById('metaBar').innerHTML = `
+                    <div class="meta-tag">Language: <span>${data.language}</span></div>
+                    <div class="meta-tag">Code: <span>${data.language_code}</span></div>
+                    <div class="meta-tag">Type: <span>${data.is_generated ? 'Auto-generated' : 'Manual'}</span></div>
+                    <div class="meta-tag">Snippets: <span>${data.raw.length}</span></div>
+                `;
+
+                // Formatted output
+                document.getElementById('formattedOutput').textContent = data.formatted;
+
+                // Timestamped view
+                const container = document.getElementById('timestampedOutput');
+                container.innerHTML = '';
+                data.raw.forEach(snippet => {
+                    const div = document.createElement('div');
+                    div.className = 'snippet';
+                    div.innerHTML = `
+                        <span class="snippet-time" title="Jump to ${formatTime(snippet.start)}">${formatTime(snippet.start)}</span>
+                        <span class="snippet-text">${snippet.text}</span>
+                    `;
+                    container.appendChild(div);
+                });
+
+                document.getElementById('results').style.display = 'block';
+            } catch (err) {
+                showError('Network error: ' + err.message);
+            }
+
+            showSpinner(false);
+        }
+
+        async function listLanguages() {
+            const videoUrl = document.getElementById('videoUrl').value.trim();
+            if (!videoUrl) {
+                showError('Please enter a YouTube video URL or ID.');
+                return;
+            }
+
+            showSpinner(true);
+            document.getElementById('languagesCard').style.display = 'none';
+            document.getElementById('errorMsg').style.display = 'none';
+
+            try {
+                const res = await fetch('/languages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ video_url: videoUrl }),
+                });
+
+                const data = await res.json();
+
+                if (!res.ok || data.error) {
+                    showError(data.error || 'Failed to list languages.');
+                    showSpinner(false);
+                    return;
+                }
+
+                const listDiv = document.getElementById('languagesList');
+                listDiv.innerHTML = data.languages.map(lang =>
+                    `<div class="meta-tag" style="display:inline-block; margin: 4px; cursor:pointer;"
+                          onclick="document.getElementById('language').value='${lang.language_code}'; fetchTranscript();">
+                        <span>${lang.language}</span> (${lang.language_code})
+                        ${lang.is_generated ? ' - Auto' : ''}
+                    </div>`
+                ).join('');
+
+                document.getElementById('languagesCard').style.display = 'block';
+            } catch (err) {
+                showError('Network error: ' + err.message);
+            }
+
+            showSpinner(false);
+        }
+
+        function copyTranscript() {
+            navigator.clipboard.writeText(currentTranscript).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = originalText, 2000);
+            });
+        }
+
+        function downloadTranscript() {
+            const ext = currentFormat === 'json' ? 'json' : currentFormat === 'srt' ? 'srt' : 'txt';
+            const blob = new Blob([currentTranscript], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `transcript.${ext}`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('videoUrl').addEventListener('keydown', e => {
+            if (e.key === 'Enter') fetchTranscript();
+        });
+    </script>
+
+    <footer>
+        <p>Made with <span class="love">♥</span> by <span class="love">Jaypee</span> for <span class="love">Trisha</span></p>
+        <p style="margin-top: 4px; font-size: 0.75rem;">Powered by youtube-transcript-api</p>
+    </footer>
+</body>
+</html>
