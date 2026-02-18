@@ -393,6 +393,22 @@
         }
 
         /* Responsive */
+        .advanced-toggle {
+            margin-bottom: 8px;
+        }
+
+        .advanced-toggle summary {
+            color: #999;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 8px 0;
+            user-select: none;
+        }
+
+        .advanced-toggle summary:hover {
+            color: #ff69b4;
+        }
+
         footer {
             text-align: center;
             margin-top: 40px;
@@ -563,7 +579,27 @@
                 </div>
             </div>
 
-            <div class="btn-group">
+            <div class="row">
+                <div class="form-group">
+                    <label for="method">Fetch Method</label>
+                    <select id="method">
+                        <option value="auto">Auto (API + yt-dlp fallback)</option>
+                        <option value="api">YouTube Transcript API only</option>
+                        <option value="ytdlp">yt-dlp only</option>
+                    </select>
+                </div>
+            </div>
+
+            <details class="advanced-toggle">
+                <summary>Advanced Settings (Proxy)</summary>
+                <div class="form-group" style="margin-top: 12px;">
+                    <label for="proxyUrl">Proxy URL (optional)</label>
+                    <input type="text" id="proxyUrl" placeholder="http://user:pass@proxy-host:port">
+                    <small style="color: #888; font-size: 0.75rem; margin-top: 4px; display: block;">Use a proxy if YouTube blocks your IP (cloud hosting). Leave empty for direct access.</small>
+                </div>
+            </details>
+
+            <div class="btn-group" style="margin-top: 16px;">
                 <button class="btn-primary" onclick="fetchTranscript()">Get Transcript</button>
                 <button class="btn-secondary" onclick="listLanguages()">List Languages</button>
             </div>
@@ -589,6 +625,7 @@
                 <div class="video-embed" id="videoEmbed"></div>
 
                 <div class="meta-bar" id="metaBar"></div>
+                <div class="meta-bar" id="methodBadge"></div>
 
                 <div class="tabs">
                     <button class="tab-btn active" onclick="switchTab('formatted')">Formatted</button>
@@ -661,10 +698,13 @@
             document.getElementById('errorMsg').style.display = 'none';
 
             try {
+                const proxyUrl = document.getElementById('proxyUrl').value.trim();
+                const method = document.getElementById('method').value;
+
                 const res = await fetch('/transcript', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ video_url: videoUrl, language, format }),
+                    body: JSON.stringify({ video_url: videoUrl, language, format, proxy_url: proxyUrl, method }),
                 });
 
                 const data = await res.json();
@@ -688,6 +728,13 @@
                     <div class="meta-tag">Code: <span>${data.language_code}</span></div>
                     <div class="meta-tag">Type: <span>${data.is_generated ? 'Auto-generated' : 'Manual'}</span></div>
                     <div class="meta-tag">Snippets: <span>${data.raw.length}</span></div>
+                `;
+
+                // Method badge
+                document.getElementById('methodBadge').innerHTML = `
+                    <div class="meta-tag" style="background: rgba(0,200,150,0.1); border-color: rgba(0,200,150,0.3);">
+                        Fetched via: <span style="color: #7dffd4;">${data.method || 'API'}</span>
+                    </div>
                 `;
 
                 // Formatted output
@@ -726,10 +773,11 @@
             document.getElementById('errorMsg').style.display = 'none';
 
             try {
+                const proxyUrl2 = document.getElementById('proxyUrl').value.trim();
                 const res = await fetch('/languages', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ video_url: videoUrl }),
+                    body: JSON.stringify({ video_url: videoUrl, proxy_url: proxyUrl2 }),
                 });
 
                 const data = await res.json();
